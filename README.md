@@ -4,10 +4,12 @@
 The project involves Image Processing using Deep learning. Convolutional Neural Networks along with Transfer Learning is used to deliver the results. Given an image of the dog, the CNN must give out the correct breed of the dog in the image out of 133 classes of dogs.
 The aim of this project is to create a classifier that is able to identify a breed of a dog if given a photo or image as input. If the photo or image contains a human face, then the application will return the breed of dog that most resembles the person in the image. I decided to opt for this project as I found the topic of Deep Neural Networks to be very fascinating and wanted to dive deeper into this with some practical work.
 ## FEATURES
+~~~~~
    => CHATBOT
    => MACHINE LEARNING
    => ECOMMERCE - PETSHOP
    => MAPS - NEAREST PETCARE
+~~~~~
 ## File Description
 ~~~~~~~
 PAWFECT
@@ -67,21 +69,21 @@ PAWFECT
 ### Snapshots
 
 ## 1 Homepage 
-![home](images/Home.PNG)
+![home](images/Home.png)
 ## 2 Adoption Page
-![Adopt](images/adoption.PNG)
+![Adopt](images/adoption.png)
 ## 3 ChatBot
-![Chat](images/ChatBot.PNG)
+![Chat](images/ChatBot.png)
 ## 4 DOG Breed Identification
 # Home
-![Home_dog](images/Dog_classify.PNG)
+![Home_dog](images/Dog_classify.png)
 # Result Pages
 ![res1](images/flask_app_2.JPG)
 ![res2](images/flask_app_3.JPG)
 ## 5 Petshop
-![shop](images/PETSHOP.PNG)
+![shop](images/PETSHOP.png)
 ## 6 Petcare
-![care](images/Petcare.PNG)
+![care](images/Petcare.png)
 
 ### Conclusion 
 
