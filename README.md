@@ -3,11 +3,11 @@
 ## IN MACHINE LEARNING I USED
 The project involves Image Processing using Deep learning. Convolutional Neural Networks along with Transfer Learning is used to deliver the results. Given an image of the dog, the CNN must give out the correct breed of the dog in the image out of 133 classes of dogs.
 The aim of this project is to create a classifier that is able to identify a breed of a dog if given a photo or image as input. If the photo or image contains a human face, then the application will return the breed of dog that most resembles the person in the image. I decided to opt for this project as I found the topic of Deep Neural Networks to be very fascinating and wanted to dive deeper into this with some practical work.
-### FEATURES
-    CHATBOT
-    MACHINE LEARNING
-    ECOMMERCE - PETSHOP
-    MAPS - NEAREST PETCARE
+## FEATURES
+   => CHATBOT
+   => MACHINE LEARNING
+   => ECOMMERCE - PETSHOP
+   => MAPS - NEAREST PETCARE
 ## File Description
 ~~~~~~~
 PAWFECT
@@ -64,17 +64,26 @@ PAWFECT
 9)	Using the model to make predictions from a web application using Flask. 
 10)	The user can select any image to test and the backend will make out the prediction and display the results on the next page.
 
-## Snapshots
+### Snapshots
 
-# 1 Homepage 
-![home](images/flask_app_1.JPG)
-
-# 2 Result Pages
-
+## 1 Homepage 
+![home](images/Home.PNG)
+## 2 Adoption Page
+![Adopt](images/adoption.PNG)
+## 3 ChatBot
+![Chat](images/ChatBot.PNG)
+## 4 DOG Breed Identification
+# Home
+![Home_dog](images/Dog_classify.PNG)
+# Result Pages
 ![res1](images/flask_app_2.JPG)
 ![res2](images/flask_app_3.JPG)
+## 5 Petshop
+![shop](images/PETSHOP.PNG)
+## 6 Petcare
+![care](images/Petcare.PNG)
 
-## Conclusion 
+### Conclusion 
 
 Because of the transfer learning, I had the option to prepare a model with the generally small dataset, and accomplished really great accuracy. Moreover, the model was prepared inside a brief timeframe, which is very proficient. The fundamental explanation is we can reuse the loads prepared by AI specialists utilizing a great many pictures.
 There are a couple of potential enhancements for the model. To begin with, the parameters of completely associated layers, for example, the number of layers, number of hubs, dropout rates, may be changed to show signs of improvement results. Second, utilizing an alternate analyzer or assessment metric may likewise improve model execution. Third, information expansion could likewise improve the last model exactness, as it will produce all the more preparing information.
