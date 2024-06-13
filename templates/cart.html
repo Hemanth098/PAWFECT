@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-blue-100 dark:bg-zinc-800">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-4xl font-bold text-center text-zinc-900 dark:text-zinc-100 uppercase mb-8">Shopping Cart</h1>
+    <ul id="cartItems" class="bg-white dark:bg-zinc-900 rounded-lg p-6 shadow-lg space-y-4">
+      <!-- Cart items will be dynamically inserted here -->
+    </ul>
+    <a href="{{url_for('bill')}}">
+    <button id="buyButton" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Buy Now</button></a>
+    <a href="{{url_for('petshop')}}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Continue Shopping</a>
+  </div>
+  <script src="{{ url_for('static',filename='petshop/script.js')}}"></script>
+</body>
+
+</html>

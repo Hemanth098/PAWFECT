@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Adoption</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @media (min-width: 768px) {
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .hidden {
+      display: none;
+    }
+    #noDogsMessage {
+      color:black;
+      font-weight: bold;
+      position: fixed;
+      font-size: 50px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /* Modal styles */
+   /* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #100f0f;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+
+  </style>
+</head>
+
+<body class="bg-blue-100 dark:bg-zinc-800">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <a href="{{url_for('home')}}" class="absolute top-4 left-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
+    <a href="{{url_for('adopt_add')}}" class="absolute top-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add a pet</a>
+    <h1 class="text-4xl font-bold text-center text-zinc-900 dark:text-zinc-100 uppercase py-8">Dog Adoption</h1>
+
+    <!-- Filtering Options -->
+    <div class="mb-4 flex justify-center">
+        <select id="stateSelect" class="rounded-lg border-gray-300 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 h-10 px-4">
+          <option value="" selected disabled>Select State</option>
+          <option value="andhra pradesh">Andhra Pradesh</option>
+          <option value="telangana">Telangana</option>
+        </select>
+        <select id="citySelect" class="ml-4 rounded-lg border-gray-300 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 h-10 px-4">
+          <option value="" selected disabled>Select City</option>
+        </select>
+        <button id="searchBtn" class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Search Dog
+        </button>
+    </div>
+
+    <div id="dogList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <!-- Static Dog Adoption Card -->
+    
+
+      <!-- Dynamic Dog Adoption Cards -->
+      {% for pet in pets %}
+      <div class="dog-card bg-white dark:bg-zinc-900 rounded-lg p-6 shadow-lg">
+        <div class="flex flex-col items-center space-y-4">
+          <img src="{{ pet.imageUrl }}" alt="Dog" class="rounded-lg">
+          <div class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{{ pet.petName }}</div> <!-- Dog's Name -->
+          <div class="text-zinc-500 dark:text-zinc-300">Age: {{ pet.age }}</div> <!-- Dog's Age -->
+          <div class="text-zinc-500 dark:text-zinc-300">Breed: {{ pet.breed }}</div> <!-- Dog's Breed -->
+          <div class="text-zinc-500 dark:text-zinc-300">Gender: {{ pet.gender }}</div> <!-- Dog's Gender -->
+          <div class="text-zinc-500 dark:text-zinc-300">Vaccinated: {{ pet.vaccinated }}</div> <!-- Vaccination Status -->
+          <div class="text-zinc-500 dark:text-zinc-300" id="dogState">State: {{ pet.state }}</div> <!-- Dog's State -->
+          <div class="text-zinc-500 dark:text-zinc-300" id="dogCity">City: {{ pet.city }}</div> <!-- Dog's City -->
+          <div class="text-zinc-500 dark:text-zinc-300">Owner: {{ pet.ownerName }}</div> <!-- Owner's Name -->
+          <div class="text-zinc-500 dark:text-zinc-300">Contact: {{ pet.contact }}</div> <!-- Owner's Contact -->
+          <button class="adopt-now-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Adopt Now
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="noDogsMessage" class="hidden text-red-500 font-semibold">No dogs available.</div>
+  </div>
+
+  <div id="adoptionModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 class="text-2xl font-semibold mb-4">Adoption Form</h2>
+      <form id="adoptionForm" action="/submit_adoption_form" method="post">
+        <div class="mb-4">
+          <label for="name" class="block font-medium text-gray-700">Name:</label>
+          <input type="text" id="name" name="name" class="rounded-lg border-black focus:ring-blue-500 focus:border-blue-500 h-10 px-4" required>
+        </div>
+        <div class="mb-4">
+          <label for="contact" class="block font-medium text-gray-700">Contact:</label>
+          <input type="tel" id="contact" name="contact" class="rounded-lg border-black focus:ring-blue-500 focus:border-blue-500 h-10 px-4" required>
+        </div>
+        <div class="mb-4">
+          <label for="location" class="block font-medium text-gray-700">Location:</label>
+          <input type="text" id="location" name="location" class="rounded-lg border-black focus:ring-blue-500 focus:border-blue-500 h-10 px-4">
+        </div>
+        <div class="mb-4">
+          <p class="block font-medium text-gray-700">Willing to take all responsibilities of the pet?</p>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio" name="responsibility" value="yes">
+            <span class="ml-2">Yes</span>
+          </label>
+          <label class="inline-flex items-center ml-6">
+            <input type="radio" class="form-radio" name="responsibility" value="no">
+            <span class="ml-2">No</span>
+          </label>
+        </div>
+        <div class="mb-4">
+          <input type="hidden" id="dogName" name="dogName">
+        </div>
+        <div class="mb-4">
+          <button type="submit" id="submitAdoptionForm" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Function to populate city options based on the selected state
+    function populateCities() {
+      var stateSelect = document.getElementById('stateSelect');
+      var citySelect = document.getElementById('citySelect');
+      citySelect.innerHTML = ''; // Clear previous options
+
+      var state = stateSelect.value;
+      var cities = [];
+      switch (state) {
+        case 'andhra pradesh':
+          cities = ['Nandyal','vizag', 'amaravathi']; // Update city values to lowercase
+          break;
+        case 'telangana':
+          cities = ['','hyderabad', 'warangal', 'nizamabad']; // Update city values to lowercase
+          break;
+        default:
+          break;
+      }
+
+      // Populate city options based on the selected state
+      cities.forEach(function(city) {
+        var option = document.createElement('option');
+        option.value = city; // Keep city values as lowercase
+        option.textContent = city.charAt(0).toUpperCase() + city.slice(1); // Capitalize first letter for display
+        citySelect.appendChild(option);
+      });
+    }
+
+    // Attach event listener to state dropdown menu
+    document.getElementById('stateSelect').addEventListener('change', populateCities);
+
+    // Initial population of cities based on the default selected state
+    populateCities();
+
+    // Event listener for search button
+    document.getElementById('searchBtn').addEventListener('click', function() {
+      var state = document.getElementById('stateSelect').value;
+      var city = document.getElementById('citySelect').value;
+      filterDogs(state, city);
+    });
+
+    function filterDogs(state, city) {
+      var dogCards = document.querySelectorAll('.dog-card');
+      var noDogsMessage = document.getElementById('noDogsMessage');
+      var dogsFound = false; // Flag to track if any dogs are found
+
+      dogCards.forEach(function(card) {
+        var cardState = card.querySelector('#dogState').textContent.toLowerCase().split(': ')[1];
+        var cardCity = card.querySelector('#dogCity').textContent.toLowerCase().split(': ')[1];
+
+        if (state.toLowerCase() === cardState && city.toLowerCase() === cardCity) {
+          card.classList.remove('hidden');
+          dogsFound = true; // At least one dog is found
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Show or hide the "No dogs available" message based on the flag
+      if (!dogsFound) {
+        noDogsMessage.style.display = 'block'; // Show the message
+      } else {
+        noDogsMessage.style.display = 'none'; // Hide the message
+      }
+    }
+
+    function adoptPet(card) {
+      // Change button text to "Adopted"
+      var button = card.querySelector('.adopt-now-btn');
+      button.textContent = 'Adopted';
+      button.classList.add('adopted'); // Add the 'adopted' class to the button
+
+      // Disable the button
+      button.disabled = true;
+
+      // Display a confirmation message on the page
+      var confirmationMessage = document.createElement('div');
+      confirmationMessage.textContent = 'Pet Adopted!';
+      confirmationMessage.classList.add('text-green-500', 'font-semibold');
+      card.appendChild(confirmationMessage);
+    }
+
+    // Event listener for adoption button
+    var adoptButtons = document.querySelectorAll('.adopt-now-btn');
+    adoptButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var card = button.closest('.dog-card');
+        adoptPet(card);
+      });
+    });
+
+    // Modal script
+    // Get the modal
+    var modal = document.getElementById('adoptionModal');
+
+    // Get the button that opens the modal
+    var adoptButtons = document.querySelectorAll('.adopt-now-btn');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName('close')[0];
+
+    // When the user clicks on the button, open the modal
+    adoptButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        modal.style.display = 'block';
+      });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = 'none';
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+
+</html>
